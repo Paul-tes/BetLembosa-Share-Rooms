@@ -1,11 +1,11 @@
-import React from "react";
+import "./globals.css"
 
-const layout = () => {
-  return <html>
-    <body>
-    <div>layout</div>
-    </body>
+export default function RootLayout({children}) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+      </body>
     </html>
-};
-
-export default layout;
+  )
+}
