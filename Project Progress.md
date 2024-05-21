@@ -10,8 +10,8 @@
 - [x] 00:23:40 Airbnb Clone Project Architecture Intro
 - [x] 00:26:00 Project Initial Setup
 - [x] 00:27:00 Navbar
-- [x] 00:39:04 Footer
-- [ ] 00:46:50 Auth Modal
+- [x] 00:39:04 Footer 
+- [ ] 00:46:50 Auth Modal -> 52:21
 - [ ] 01:28:21 Zustand Setup
 - [ ] 01:35:55 Signup & Login
 - [ ] 02:13:00 Create Listing

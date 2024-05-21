@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-export const nextConfig = {
+const nextConfig = {
   reactStrictMode: false,
   env: {
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: "dctahvizk",
@@ -8,3 +8,5 @@ export const nextConfig = {
     domains: ["res.cloudinary.com"],
   },
 };
+
+export default nextConfig;
