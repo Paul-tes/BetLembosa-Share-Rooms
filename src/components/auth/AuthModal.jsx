@@ -2,8 +2,12 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import FormInput from "../common/FormInput";
+import { useAppStore } from "@/store/store";
 
 const AuthModal = () => {
+
+  const { setAuthModal } = useAppStore();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
