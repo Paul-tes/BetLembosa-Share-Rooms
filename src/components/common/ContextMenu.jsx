@@ -3,6 +3,12 @@ import React, { useRef } from "react";
 const ContextMenu = ({ optios, cordinates, contextMenu, setContextMenue }) => {
   const contextMenuRef = useRef(null);
 
+  // closing the contextMenue when each menue lists are clicked.
+  const handleClick = (e, callBack) => {
+    e.stopPropagation();
+    callBack();
+  }
+
   return (
     <div
     ref={contextMenuRef}
@@ -14,10 +20,11 @@ const ContextMenu = ({ optios, cordinates, contextMenu, setContextMenue }) => {
     className="bg-white shadow-2xl fixed py-5 z-[100] rounded-lg border border-gray-200"
     >
       <ul>
-        {optios.map(({name, callback}) => (
+        {optios.map(({name, callBack}) => (
           <li
             className="hover:bg-gray-100 pl-5 pr-10 py-2 cursor-pointer"
             key={name}
+            onClick={(e) => handleClick(e, callBack)}
           >
             <span>{name}</span>
           </li>

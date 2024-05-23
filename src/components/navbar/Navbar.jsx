@@ -16,28 +16,28 @@ const Navbar = () => {
   const contextMenuOptions = [
     {
       name: "LogIn",
-      callback: () => {
-        setIsContextMenuVisible(false);
+      callBack: () => {
+        setIsContextMenuVisible(false); // when the list item is clicked the contextMenue should be closed, so we passed the clossing method as a function paramter.
       }
     },
 
     {
       name: "SignUp",
-      callback: () => {
+      callBack: () => {
         setIsContextMenuVisible(false);
       }
     },
 
     {
       name: "Stay BetLembosa",
-      callback: () => {
+      callBack: () => {
         setIsContextMenuVisible(false);
       }
     },
 
     {
       name: "Help",
-      callback: () => {
+      callBack: () => {
         setIsContextMenuVisible(false);
       }
     }
@@ -64,12 +64,12 @@ const Navbar = () => {
             <FiGlobe />
             </li>
             <li
-              className="flex cursor-pointer items-center gap-2 border border-gray-300 py-2 px-3 rounded-full hover:shadow-xl transition-all duration-500"
+              className="flex cursor-pointer items-center gap-4 border border-gray-300 py-2 px-3 rounded-full hover:shadow-xl transition-all duration-500"
               onClick={() => setIsContextMenuVisible(true)}
             >
               <RxHamburgerMenu />
               <span>
-                <Image 
+                <Image
                   src = "/empty-profile.png"
                   alt="profile picture"
                   height={30}
@@ -84,8 +84,8 @@ const Navbar = () => {
         <ContextMenu
           contextMenu={isContextMenuVisible}
           setContextMenue={setIsContextMenuVisible}
-          cordinates={{
-            x: 250,
+          cordinates={{ 
+            x: window.innerWidth - 250,
             y: 70,
           }}
           optios={contextMenuOptions}
