@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const ContextMenu = ({ optios, cordinates, contextMenu, setContextMenue }) => {
   const contextMenuRef = useRef(null);
@@ -7,7 +7,27 @@ const ContextMenu = ({ optios, cordinates, contextMenu, setContextMenue }) => {
   const handleClick = (e, callBack) => {
     e.stopPropagation();
     callBack();
-  }
+  };
+
+  useEffect(()=> {
+
+    // Close contextMenue when clicked on the windos, outside of the menue section area.
+    const handleClickOutside = (event) => {
+      if(
+        contextMenuRef.current && // Ensure the ref is set
+        !contextMenuRef.current.contains(event.target) // Check if the click is outside the menu
+      ) {
+        setContextMenue(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    // Cleanup the event listener
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    }
+  }, [setContextMenue]);
 
   return (
     <div
