@@ -6,9 +6,15 @@ import BetLembosaLogo from "../../svg/betlemobsaLogo.png"
 import { FiGlobe } from "react-icons/fi"
 import { RxHamburgerMenu } from "react-icons/rx"
 import ContextMenu from "../common/ContextMenu";
+import { useAppStore } from "@/store/store";
 
 
 const Navbar = () => {
+
+  // use state from zstand from appStore, AuthSlice
+  // get setAuthModal method in zstand metod.
+  const { setAuthModal } = useAppStore();
+
   // use state for top navBar unmberger menue
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false)
 
@@ -17,6 +23,7 @@ const Navbar = () => {
     {
       name: "LogIn",
       callBack: () => {
+        setAuthModal();
         setIsContextMenuVisible(false); // when the list item is clicked the contextMenue should be closed, so we passed the clossing method as a function paramter.
       }
     },
@@ -24,6 +31,7 @@ const Navbar = () => {
     {
       name: "SignUp",
       callBack: () => {
+        setAuthModal();
         setIsContextMenuVisible(false);
       }
     },
