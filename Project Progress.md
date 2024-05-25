@@ -11,7 +11,7 @@
 - [x] 00:26:00 Project Initial Setup
 - [x] 00:27:00 Navbar
 - [x] 00:39:04 Footer 
-- [ ] 00:46:50 Auth Modal -> 1:46:00 
+- [ ] 00:46:50 Auth Modal -> 2:12:00 
 - [ ] 01:28:21 Zustand Setup
 - [ ] 01:35:55 Signup & Login
 - [ ] 02:13:00 Create Listing

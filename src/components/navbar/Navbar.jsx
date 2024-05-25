@@ -13,7 +13,7 @@ const Navbar = () => {
 
   // use state from zstand from appStore, AuthSlice
   // get setAuthModal method in zstand metod.
-  const { setAuthModal, userInfo } = useAppStore();
+  const { setAuthModal, userInfo, isLoggedIn, setUserInfo, setIsLoggedIn } = useAppStore();
 
   // use state for top navBar unmberger menue
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false)
@@ -49,6 +49,63 @@ const Navbar = () => {
         setIsContextMenuVisible(false);
       }
     }
+  ];
+
+  const authenticatedContextMenuOptions = [
+    {
+      name: "Messages",
+      callBack: () => {
+        setIsContextMenuVisible(false);
+      },
+    },
+    {
+      name: "Notifications",
+      callBack: () => {
+        setIsContextMenuVisible(false);
+      },
+    },
+    {
+      name: "Trips",
+      callBack: () => {
+        router.push("/trips");
+        setIsContextMenuVisible(false);
+      },
+    },
+    {
+      name: "Wishlists",
+      callBack: () => {
+        router.push("/wishlist");
+        setIsContextMenuVisible(false);
+      },
+    },
+    {
+      name: "Manage Listings",
+      callBack: () => {
+        router.push("/my-listings");
+        setIsContextMenuVisible(false);
+      },
+    },
+    {
+      name: "Account",
+      callBack: () => {
+        setIsContextMenuVisible(false);
+      },
+    },
+    {
+      name: "Help",
+      callBack: () => {
+        setIsContextMenuVisible(false);
+      },
+    },
+    {
+      name: "Logout",
+      callBack: () => {
+        setIsContextMenuVisible(false);
+        setIsLoggedIn(false);
+        setUserInfo(null);
+        localStorage.clear();
+      },
+    },
   ];
 
   return (
@@ -102,7 +159,9 @@ const Navbar = () => {
             x: window.innerWidth - 250,
             y: 70,
           }}
-          optios={contextMenuOptions}
+          optios={
+            isLoggedIn == true ? authenticatedContextMenuOptions : contextMenuOptions
+          }
         />
       )}
     </header>
