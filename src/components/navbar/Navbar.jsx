@@ -13,7 +13,7 @@ const Navbar = () => {
 
   // use state from zstand from appStore, AuthSlice
   // get setAuthModal method in zstand metod.
-  const { setAuthModal } = useAppStore();
+  const { setAuthModal, userInfo } = useAppStore();
 
   // use state for top navBar unmberger menue
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false)
@@ -77,12 +77,18 @@ const Navbar = () => {
             >
               <RxHamburgerMenu />
               <span>
-                <Image
-                  src = "/empty-profile.png"
-                  alt="profile picture"
-                  height={30}
-                  width={30}
-                />
+                {userInfo ? (
+                  <span className="flex justify-center items-center bg-black text-white h-7 w-7 text-sm rounded-full">
+                    {userInfo?.firstName?.split("").shift()?.toUpperCase()}
+                  </span>
+                ) : (
+                  <Image
+                    src="/empty-profile.png"
+                    alt="profile"
+                    height={30}
+                    width={30}
+                  />
+                )}
               </span>
             </li>
           </ul>          
