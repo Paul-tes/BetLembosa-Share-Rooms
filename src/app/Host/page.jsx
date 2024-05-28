@@ -123,7 +123,7 @@ const Page = () => {
           </button>
         ) : (
           <button
-            className="bg-airbnb-gradient py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer"
+            className="bg-betlembosa-gradient py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer"
             onClick={handleNext}
           >
             Get Started
