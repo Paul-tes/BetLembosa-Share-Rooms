@@ -1,7 +1,7 @@
 import React from "react";
 
-const ListingCreated = () => {
+const HomeHosted = () => {
   return <div>ListingCreated</div>;
 };
 
-export default ListingCreated;
+export default HomeHosted;
