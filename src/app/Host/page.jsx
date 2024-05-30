@@ -8,7 +8,7 @@ import BetLembosaLogo from "../../svg/LogoB.png"
 // import step views
 import Overview from "@/components/process/Overview";
 import StepOneStarter from "@/components/process/StepOneStarter";
-import ListingTypeSelector from "@/components/process/HostingTypeSelector";
+import HomeTypeSelector from "@/components/process/HomeTypeSelector";
 import ListingPlaceType from "@/components/process/ListingPlaceType";
 import PlaceLocation from "@/components/process/PlaceLocation";
 import PlaceDetails from "@/components/process/PlaceDetails";
@@ -45,7 +45,7 @@ const Page = () => {
       case 1:
         return <StepOneStarter />;
       case 2:
-        return <ListingTypeSelector />;
+        return <HomeTypeSelector />;
       case 3:
         return <ListingPlaceType />;
       case 4:
