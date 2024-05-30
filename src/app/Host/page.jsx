@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 // import logs
-import BetLembosaLogo from "../../svg/betlemobsaLogo.png"
+import BetLembosaLogo from "../../svg/LogoB.png"
 
 // import step views
 import Overview from "@/components/process/Overview";
 import StepOneStarter from "@/components/process/StepOneStarter";
-import ListingTypeSelector from "@/components/process/ListingTypeSelector";
+import ListingTypeSelector from "@/components/process/HostingTypeSelector";
 import ListingPlaceType from "@/components/process/ListingPlaceType";
 import PlaceLocation from "@/components/process/PlaceLocation";
 import PlaceDetails from "@/components/process/PlaceDetails";
@@ -83,7 +83,7 @@ const Page = () => {
            <Image
             src={BetLembosaLogo}
             alt="BetLembosa Logo"
-            width={160}
+            width={40}
           />
           </div>
         </div>
@@ -108,7 +108,7 @@ const Page = () => {
       >
         {step >= 1 && (
           <button
-            className=" py-3 mt-5  px-10 text-airbnb-light-black underline hover:bg-gray-200 text-base font-medium rounded-md cursor-pointer"
+            className=" py-3 mt-5  px-10 text-betlembosa-light-black underline hover:bg-gray-200 text-base font-medium rounded-md cursor-pointer"
             onClick={handlePrevious}
           >
             Back
