@@ -9,7 +9,7 @@ import BetLembosaLogo from "../../svg/LogoB.png"
 import Overview from "@/components/process/Overview";
 import StepOneStarter from "@/components/process/StepOneStarter";
 import HomeTypeSelector from "@/components/process/HomeTypeSelector";
-import ListingPlaceType from "@/components/process/ListingPlaceType";
+import HomePlaceType from "@/components/process/HomePlaceType";
 import PlaceLocation from "@/components/process/PlaceLocation";
 import PlaceDetails from "@/components/process/PlaceDetails";
 import FloorPlan from "@/components/process/FloorPlan";
@@ -47,7 +47,7 @@ const Page = () => {
       case 2:
         return <HomeTypeSelector />;
       case 3:
-        return <ListingPlaceType />;
+        return <HomePlaceType />;
       case 4:
         return <PlaceLocation />;
       case 5:
