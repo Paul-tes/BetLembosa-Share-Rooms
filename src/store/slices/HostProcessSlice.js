@@ -7,4 +7,10 @@ export const createNewHostProcessSlice = (set, get) => ({
   setMapData: (mapData) => set({ mapData }),
   locationData: undefined,
   setLocationData: (locationData) => set({ locationData }),
+  placeSpace: { bathrooms: 1, beds: 1, guests: 2 },
+  setPlaceSpace: (placeSpace) => set({ placeSpace }),
+  placeAmeneites: [],
+  setPlaceAmenities: (placeAmeneites) => set({ placeAmeneites }),
+  photos: [],
+  setPhotos: (photos) => set({ photos }),
 });
