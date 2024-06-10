@@ -7,7 +7,7 @@ import { checkUser, login, signup } from "@/lib/auth";
 
 const AuthModal = () => {
 
-  const { setAuthModal, setUserInfo, setIsLoggedIn } = useAppStore();
+  const { setAuthModal, setUserInfo, setIsLoggedIn, userInfo } = useAppStore();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,6 @@ const AuthModal = () => {
     if(email && password) {
       const data = await login(email, password);
       setUserInfo(data);
-      setIsLoggedIn(true);
       setAuthModal();
     }
   };
@@ -34,7 +33,6 @@ const AuthModal = () => {
     if(email && password && firstName && lastName) {
       const data = await signup(email, password, firstName, lastName);
       setUserInfo(data);
-      setIsLoggedIn(true);
       setAuthModal();
     }
   };

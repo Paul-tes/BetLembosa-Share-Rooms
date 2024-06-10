@@ -1,7 +1,7 @@
 import React from "react";
 
-const ListingMap = () => {
+const HomeMap = () => {
   return <div>ListingMap</div>;
 };
 
-export default ListingMap;
+export default HomeMap;

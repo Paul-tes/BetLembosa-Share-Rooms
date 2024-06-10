@@ -10,5 +10,6 @@ export const createAuthSlice = (set, get) => ({
   },
   setUserInfo: (userInfo) => {
     set({ userInfo });
+    if(userInfo !== null) set({isLoggedIn: true});
   },
 });

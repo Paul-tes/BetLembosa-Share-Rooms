@@ -1,7 +1,7 @@
 import React from "react";
 
-const ListingPhotos = () => {
+const HomePhotos = () => {
   return <div>ListingPhotos</div>;
 };
 
-export default ListingPhotos;
+export default HomePhotos;

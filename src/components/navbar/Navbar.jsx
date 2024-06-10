@@ -136,7 +136,7 @@ const Navbar = () => {
               <span>
                 {userInfo ? (
                   <span className="flex justify-center items-center bg-black text-white h-7 w-7 text-sm rounded-full">
-                    {userInfo?.firstName?.split("").shift()?.toUpperCase()}
+                    {userInfo?.userName?.split("").shift()?.toUpperCase()}
                   </span>
                 ) : (
                   <Image

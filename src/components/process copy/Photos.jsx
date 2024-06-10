@@ -22,7 +22,7 @@ export default function Photos() {
         onUploadAdded={handleUpload}
         uploadPreset="di8pg96iq"
       >
-        <span className="bg-airbnb-gradient py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer">
+        <span className="bg-betlembosa-gradient py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer">
           Upload
         </span>
       </CldUploadButton>

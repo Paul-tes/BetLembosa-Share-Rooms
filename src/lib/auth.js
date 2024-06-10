@@ -2,13 +2,13 @@ import { createUrl, get, isStoredJwt, post, setStoredJwt } from "./http";
 
 export const me = async () => {
   return isStoredJwt()
-    ? (await get(createUrl("/api/me")).catch(() => null))?.data
+    ? (await get(createUrl("/api/v1/account/me")).catch(() => null))?.data
     : null;
 };
 
-export const login = async (username, password) => {
+export const login = async (email, password) => {
   const result = (
-    await post(createUrl("/api/login"), { username, password }).catch(
+    await post(createUrl("/api/v1/account/login"), { email, password }).catch(
       () => null
     )
   )?.data;
@@ -20,10 +20,10 @@ export const login = async (username, password) => {
   return me();
 };
 
-export const signup = async (username, password, firstName, lastName) => {
+export const signup = async (email, password, firstName, lastName) => {
   const result = (
-    await post(createUrl("/api/signup"), {
-      username,
+    await post(createUrl("/api/v1/account/account/register"), {
+      email,
       password,
       firstName,
       lastName,
@@ -39,7 +39,7 @@ export const signup = async (username, password, firstName, lastName) => {
 
 export const checkUser = async (email) => {
   const result = (
-    await post(createUrl("/api/check-user"), { email }).catch(() => null)
+    await post(createUrl("/api/v1/account/check-user"), { email }).catch(() => null)
   )?.data;
   if (!result) return false;
   return true;

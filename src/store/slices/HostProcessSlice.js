@@ -13,4 +13,10 @@ export const createNewHostProcessSlice = (set, get) => ({
   setPlaceAmenities: (placeAmeneites) => set({ placeAmeneites }),
   photos: [],
   setPhotos: (photos) => set({ photos }),
+  title: "",
+  setTitle: (title) => set({ title }),
+  description: "",
+  setDescription: (description) => set({ description }),
+  price: 0,
+  setPrice: (price) => set({ price }),
 });

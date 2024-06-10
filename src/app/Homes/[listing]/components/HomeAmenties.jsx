@@ -1,7 +1,7 @@
 import React from "react";
 
-const ListingAmenties = () => {
+const HomeAmenties = () => {
   return <div>ListingAmenties</div>;
 };
 
-export default ListingAmenties;
+export default HomeAmenties;
