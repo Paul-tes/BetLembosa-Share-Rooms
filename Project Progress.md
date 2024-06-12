@@ -50,3 +50,9 @@
 - Search Listings
 - Search Listings using Map
 - View Listings Data on Map
+
+
+
+## Poject Last touches
+- error page generattion.
+- 

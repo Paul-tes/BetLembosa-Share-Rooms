@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import Image from "next/image";
+import NavLoad from "@/components/common/NavLoad";
 
 // import logs
 import BetLembosaLogo from "../../svg/LogoB.png"
@@ -88,9 +89,7 @@ const Page = () => {
           </div>
         </div>
         {step <= 13 && (
-          <button className="border border-gray-300 px-5 py-2 rounded-full font-semibold hover:border-gray-700 cursor-pointer">
-            Save & exit
-          </button>
+          <NavLoad />
         )}
       </header>
       <div>

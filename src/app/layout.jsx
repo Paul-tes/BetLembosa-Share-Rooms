@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import "./globals.css"
 import { Inter } from "next/font/google";
+import NavigationEvents from "@/components/common/NavigationEvents";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +25,10 @@ export default function RootLayout({children}) {
       ></link>
       <body className={inter.className}>
         {children}
+
+        <Suspense fallback={null}>
+          <NavigationEvents />
+        </Suspense>
       </body>
     </html>
   );

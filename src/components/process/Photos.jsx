@@ -9,8 +9,11 @@ export default function Photos() {
 
   const { photos, setPhotos } = useAppStore();
   const handleUpload = (data) => {
-    setPhotos([...photos, data.info.secure_url]);
-    console.log(photos);
+    console.log(data);
+    const uploadedPhoto = photos;
+    uploadedPhoto.push(data.info.url);
+    console.log(uploadedPhoto);
+    setPhotos(uploadedPhoto);
   };
 
   return (
@@ -29,11 +32,10 @@ export default function Photos() {
           Upload
         </span>
       </CldUploadButton>
-
       <div className="grid grid-cols-3 gap-4 h-[55vh] overflow-auto pb-10 no-scrollbar">
         {photos.map((photo) => (
           <div className="relative h-36 w-[200px]" key={photo}>
-            <Image src={photo} fill alt="upload" />
+            <Image src={photo != "" ? photo : ""} fill alt="upload" />
           </div>
         ))}
       </div>

@@ -3,14 +3,14 @@ import { useAppStore } from "@/store/store";
 import { AmenetiesType } from "@/data/Amenities";
 
 const ProcessAmeneties = () => {
-  const { placeAmeneites, setPlaceAmenities } = useAppStore();
+  const { placeAmenities, setPlaceAmenities } = useAppStore();
   const addAmenety = (name) => {
-    setPlaceAmenities([...placeAmeneites, name]);
+    setPlaceAmenities([...placeAmenities, name]);
   };
   const removeAmenty = (name) => {
-    const index = placeAmeneites.findIndex((amenetiy) => amenetiy === name);
+    const index = placeAmenities.findIndex((amenetiy) => amenetiy === name);
     if (index) {
-      const clonedAmenties = [...placeAmeneites];
+      const clonedAmenties = [...placeAmenities];
       clonedAmenties.splice(index, 1);
       setPlaceAmenities(clonedAmenties);
     }
@@ -41,11 +41,11 @@ const ProcessAmeneties = () => {
                   <button
                     key={name}
                     className={` flex flex-row justify-start font-semibold border border-gray-300 rounded-md p-3 hover:border-gray-950 transition-all duration-300 ${
-                      placeAmeneites?.find((amentiy) => amentiy === name) &&
+                      placeAmenities?.find((amentiy) => amentiy === name) &&
                       "border-gray-950 bg-slate-200"
                     }`}
                     onClick={() => {
-                      placeAmeneites?.includes(name)
+                      placeAmenities?.includes(name)
                         ? removeAmenty(name)
                         : addAmenety(name);
                     }}
