@@ -10,7 +10,6 @@ const TOKEN = "pk.eyJ1IjoicGF1bC10ZXMiLCJhIjoiY2x3dGR3ODI1MDJiZDJscXpxMXBmNHQ2ei
 const PlaceLocation = () => {
   const { setMapData, setLocationData, mapData, locationData } = useAppStore();
   const getResults = ({ result }) => {
-    console.log(result);
     // extract longtiude and latitiude location of the the searched place.
     const [longitude, latitude] = result?.geometry?.coordinates;
     // prepare data to extract
@@ -36,9 +35,6 @@ const PlaceLocation = () => {
     // setting all map datas
     setMapData({ latitude, longitude });
     setLocationData({ ...data });
-
-    console.log(mapData)
-    console.log(locationData)
   };
 
   return (

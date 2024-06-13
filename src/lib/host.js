@@ -1,5 +1,6 @@
 import { createUrl, post } from "./http";
 import QueryString from "qs";
+import axios from "axios";
 
 export const createHomeAPI = async (hostData) => {
   const result = (
@@ -20,10 +21,10 @@ export const getAllHomes = async () => {
     orderBy: { createdAt: "asc" },
   });
 
-  const result = await axios.get(createUrl(`/api/listings?${query}`));
+  const result = await axios.get(createUrl(`/api/v1/home/getHomes?${query}`));
 
   if (!result) {
-    alert("Could not get listings");
+    alert("Could not get Homes");
     return [];
   }
 

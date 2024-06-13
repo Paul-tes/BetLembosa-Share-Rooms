@@ -9,10 +9,8 @@ export default function Photos() {
 
   const { photos, setPhotos } = useAppStore();
   const handleUpload = (data) => {
-    console.log(data);
     const uploadedPhoto = photos;
     uploadedPhoto.push(data.info.url);
-    console.log(uploadedPhoto);
     setPhotos(uploadedPhoto);
   };
 
