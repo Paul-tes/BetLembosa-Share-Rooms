@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "@/components/navbar/Navbar";
+const Navbar = dynamic(() => import("@/components/navbar/Navbar"), {ssr:false})
 import Footer from "@/components/footer/Footer";
 import AuthModal from "@/components/auth/AuthModal";
 import React, { useEffect } from "react";
@@ -10,6 +10,7 @@ import { hostTypes } from "@/data/HostTypes";
 import ListView from "@/components/views/ListView";
 import ViewSwitchBadge from "@/components/views/ViewSwitchBadge";
 import MapView from "@/components/views/MapView";
+import dynamic from "next/dynamic";
 
 const Home = () => {
 

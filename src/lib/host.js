@@ -37,3 +37,12 @@ export const getAllHomes = async () => {
 //   }
 //   return result.data;
 // };
+
+export const getMyHosts = async () => {
+  const result = await axios.get(createUrl('/api/v1/home/GetMyHomes'));
+  if (!result) {
+    console.log("not found");
+  }
+  console.log({ result });
+  return result.data;
+};

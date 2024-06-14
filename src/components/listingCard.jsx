@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-const listingCard = ({ data }) => {
+const ListingCard = ({ data }) => {
   console.log(data)
   return (
     <div className="flex items-center justify-center flex-col gap-1">
@@ -26,4 +26,4 @@ const listingCard = ({ data }) => {
   )
 };
 
-export default listingCard;
+export default ListingCard;

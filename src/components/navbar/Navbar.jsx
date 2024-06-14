@@ -7,12 +7,14 @@ import { FiGlobe } from "react-icons/fi"
 import { RxHamburgerMenu } from "react-icons/rx"
 import ContextMenu from "../common/ContextMenu";
 import { useAppStore } from "@/store/store";
-
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
 
+  const router = useRouter();
+
   // use state from zstand from appStore, AuthSlice
-  // get setAuthModal method in zstand metod.
+  // get setAuthModal mePthod in zstand metod.
   const { setAuthModal, userInfo, isLoggedIn, setUserInfo, setIsLoggedIn } = useAppStore();
 
   // use state for top navBar unmberger menue
@@ -79,9 +81,9 @@ const Navbar = () => {
       },
     },
     {
-      name: "Manage Listings",
+      name: "Manage Hosts",
       callBack: () => {
-        router.push("/my-listings");
+        router.push("/my-hosts");
         setIsContextMenuVisible(false);
       },
     },
