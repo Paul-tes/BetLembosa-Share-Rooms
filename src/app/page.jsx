@@ -9,11 +9,12 @@ import { getAllHomes } from "@/lib/host";
 import { hostTypes } from "@/data/HostTypes";
 import ListView from "@/components/views/ListView";
 import ViewSwitchBadge from "@/components/views/ViewSwitchBadge";
+import MapView from "@/components/views/MapView";
 
 const Home = () => {
 
   // States
-  const { isAuthModalOpen, setListings } = useAppStore();
+  const { isAuthModalOpen, setListings, isMapView } = useAppStore();
 
 
   useEffect(() => {
@@ -24,10 +25,10 @@ const Home = () => {
     getData();
   }, [setListings]);
 
-  return <div className="max-h[100vh] h-[100vh]">
+  return <div>
     <Navbar/>
     <div className="flex items-center justify-center">
-        <div className="w-[90vw] overflow-auto no-scrollbar mt-3 px-5">
+        <div className="w-[90vw] overflow-auto no-scrollbar mt-32 px-5">
           <ul className="flex gap-5 h-full">
             {hostTypes.map((data) => (
               <li
@@ -49,7 +50,10 @@ const Home = () => {
         </div>
       </div>
     <ViewSwitchBadge />
-    <ListView />
+    {
+      isMapView ? <MapView /> : <ListView />
+    }
+    
     <Footer />
     {
       isAuthModalOpen && <AuthModal />

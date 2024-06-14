@@ -109,7 +109,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="w-full flex flex-col justify-center transition-all duration-30 h-20 border-b border-b-gray-200">
+    <div className="fixed z-50 bg-white shadow-md w-full flex flex-col justify-center transition-all duration-30 h-20 border-b border-b-gray-200">
       <div className="flex items-center justify-between px-20">
         <div className="flex-grow basis-0">
           <div className="w-max cursor-pointer">
@@ -164,7 +164,7 @@ const Navbar = () => {
           }
         />
       )}
-    </header>
+    </div>
   );
 };
 
