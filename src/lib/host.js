@@ -1,6 +1,5 @@
-import { createUrl, post } from "./http";
+import { createUrl, post, del, get } from "./http";
 import QueryString from "qs";
-import axios from "axios";
 
 export const createHomeAPI = async (hostData) => {
   const result = (
@@ -21,7 +20,7 @@ export const getAllHomes = async () => {
     orderBy: { createdAt: "asc" },
   });
 
-  const result = await axios.get(createUrl(`/api/v1/home/getHomes?${query}`));
+  const result = await get(createUrl(`/api/v1/home/getHomes?${query}`));
 
   if (!result) {
     alert("Could not get Homes");
@@ -39,10 +38,36 @@ export const getAllHomes = async () => {
 // };
 
 export const getMyHosts = async () => {
-  const result = await axios.get(createUrl('/api/v1/home/GetMyHomes'));
+  const result = await get(createUrl('/api/v1/home/GetMyHomes'));
   if (!result) {
     console.log("not found");
   }
   console.log({ result });
   return result.data;
+};
+
+export const deleteListingAPI = async (id) => {
+  const result = await del(createUrl(`/api/v1/home/delete?id=${id}`));
+  if (!result) {
+    console.log("cannot delete");
+  }
+  return result;
+};
+
+// get user wish lists
+export const getUserWishlists = async (userId) => {
+  const query = qs.stringify({
+    where: {
+      user: { id: userId },
+    },
+    select: {
+      listing: true,
+    },
+  });
+  const result = (
+    await axios.get(createUrl(`/api/wishlists?${query}`)).catch(() => null)
+  )?.data;
+
+  console.log({ result });
+  return result;
 };

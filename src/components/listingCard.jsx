@@ -2,11 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
-// import {
-//   addToWishList,
-//   deleteListingAPI,
-//   removeFromWishListAPI,
-// } from "airbnb/lib/lisitng";
+import { deleteListingAPI } from "@/lib/host";
 
 import { useAppStore } from "@/store/store";
 import { IoMdHeart } from "react-icons/io";

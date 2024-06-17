@@ -33,7 +33,11 @@ export default function Photos() {
       <div className="grid grid-cols-3 gap-4 h-[55vh] overflow-auto pb-10 no-scrollbar">
         {photos.map((photo) => (
           <div className="relative h-36 w-[200px]" key={photo}>
-            <Image src={photo != "" ? photo : ""} fill alt="upload" />
+            <Image
+              src={photo != "" ? photo : ""}
+              fill alt="upload"
+              className="rounded-lg shadow-blue-900 shadow-md"
+            />
           </div>
         ))}
       </div>

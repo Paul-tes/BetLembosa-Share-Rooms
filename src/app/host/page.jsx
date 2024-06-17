@@ -85,6 +85,7 @@ const Page = () => {
             src={BetLembosaLogo}
             alt="BetLembosa Logo"
             width={40}
+            onClick={()=> {"/"}}
           />
           </div>
         </div>
