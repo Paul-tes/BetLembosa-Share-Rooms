@@ -27,9 +27,9 @@ export default function Page() {
       <Navbar />
       <div className=" flex justify-start items-start">
         {userListings.length > 0 ? (
-          <div className="grid grid-cols-4 px-10 gap-3 py-10   w-full items-start ">
+          <div className="grid grid-cols-4 px-10 gap-3 py-10   w-full items-start mt-20">
             {userListings?.map((listing, index) => (
-              <ListingCard data={listing} key={index} isMyListing />
+              <ListingCard data={listing} key={index} isMyListing={true} />
             ))}
           </div>
         ) : (
