@@ -1,8 +1,13 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { getUserWishlists } from "@/lib/host";
 import { usePathname, useRouter } from "next/navigation";
-import { deleteListingAPI } from "@/lib/host";
+import {
+  deleteListingAPI,
+  addToWishList,
+  removeFromWishList
+ } from "@/lib/host";
 
 import { useAppStore } from "@/store/store";
 import { IoMdHeart } from "react-icons/io";
@@ -11,42 +16,66 @@ export default function ListingCard({
   data,
   isMyListing = false,
   isWishList = false,
-  wishListId = undefined,
 }) {
   const {
     removeUserListing,
     userInfo,
     wishLists,
-    addToWishListSlice,
     wishListsPage,
     setWishListsPage,
+    setWishLists,
   } = useAppStore();
 
   const pathname = usePathname();
 
   const router = useRouter();
+
+  // fetch the wishlist if the user logged in.
+  useEffect(() => {
+    const getData = async () => {
+      const wishlists = await getUserWishlists();
+      setWishListsPage(wishlists);
+      // set wishlists ids in wishLists
+      // Extract IDs from the wishlists and set them in wishLists
+      const wishlistIds = wishlists.map((wishlist) => wishlist.id);
+      setWishLists(wishlistIds);
+    };
+    getData();
+  }, []);
+
+
   const deleteListing = async () => {
     await deleteListingAPI(data?.id);
     removeUserListing(data.id);
   };
 
   const addWishList = async () => {
-    await addToWishList(data.id, userInfo?.id);
-    addToWishListSlice(data.id);
-  };
+    await addToWishList(data.id);
 
-  const removeWishlist = async () => {
-    // const id = wishLists.find((list) => console.log(list));
-    // await removeFromWishListAPI(id.id);
+    // Add to wishListsPage
+    const updatedWishListPage = wishListsPage;
+    updatedWishListPage.push(data)
+    setWishListsPage(updatedWishListPage);
+
+    // Add to wishLists array
+    const updatedWishlist = wishLists;
+    updatedWishlist.push(data.id);
+    setWishLists(updatedWishlist);
+    console.log(wishLists);
   };
 
   const deleteWishList = async () => {
-    await removeFromWishListAPI(wishListId);
-    const index = wishListsPage.findIndex((list) => list.id === wishListId);
-    if (index !== -1) {
-      wishListsPage.splice(index, 1);
-      setWishListsPage(wishListsPage);
-    }
+    await removeFromWishList(data.id);
+    // Remove from wishListsPage
+    const updatedWishListsPage = wishListsPage.filter((list) => list.id !== data.id);
+
+    // Remove from wishlist (wishLists contains only IDs)
+    const updatedWishlist = wishLists.filter((id) => id !== data.id);
+
+    // Update state with new arrays
+    setWishListsPage(updatedWishListsPage);
+    setWishLists(updatedWishlist);
+    console.log(wishLists);
   };
 
   return (
@@ -56,12 +85,12 @@ export default function ListingCard({
         onClick={() => router.push(`/listing/${data.id}`)}
       >
         <div className="flex flex-col gap-2">
-          <div className="relative w-64 h-56 ">
+          <div className="relative w-64 h-56">
             <Image
               src={data?.photos[0]}
               fill
               alt="My Host photos"
-              className="rounded-lg object-cover"
+              className="rounded-lg object-cover shadow-md shadow-blue-400"
             />
             {pathname === "/" && userInfo && (
               <div className="absolute z-20 right-2 top-2">
@@ -69,13 +98,13 @@ export default function ListingCard({
                   style={{ stroke: "white", strokeWidth: "40" }}
                   className={`text-3xl ${
                     wishLists?.includes(data.id)
-                      ? "text-airbnb-theme-color"
+                      ? "text-[#ff272799]"
                       : "text-[#00000099]"
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
                     if (wishLists?.includes(data.id)) {
-                      removeWishlist();
+                      deleteWishList();
                     } else addWishList();
                   }}
                 />
@@ -90,7 +119,7 @@ export default function ListingCard({
       </div>
       {isMyListing && (
         <button
-          className="focus:outline-none bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300  py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer w-72"
+          className="focus:outline-none bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300  py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer w-64"
           onClick={deleteListing}
         >
           Delete
@@ -98,7 +127,7 @@ export default function ListingCard({
       )}
       {isWishList && (
         <button
-          className="bg-airbnb-gradient py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer w-80"
+          className="focus:outline-none bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300  py-3 mt-5  px-5 text-white text-base font-medium rounded-md cursor-pointer w-64"
           onClick={deleteWishList}
         >
           Delete

@@ -1,5 +1,6 @@
 import { createUrl, post, del, get } from "./http";
 import QueryString from "qs";
+import axios from "axios";
 
 export const createHomeAPI = async (hostData) => {
   const result = (
@@ -30,19 +31,11 @@ export const getAllHomes = async () => {
   return result.data;
 };
 
-// export const getListing = async (listingId) => {
-//   const result = await axios.get(createUrl(`/api/listings/${listingId}`));
-//   if (!result) {
-//   }
-//   return result.data;
-// };
-
 export const getMyHosts = async () => {
   const result = await get(createUrl('/api/v1/home/GetMyHomes'));
   if (!result) {
     console.log("not found");
   }
-  console.log({ result });
   return result.data;
 };
 
@@ -55,19 +48,60 @@ export const deleteListingAPI = async (id) => {
 };
 
 // get user wish lists
-export const getUserWishlists = async (userId) => {
-  const query = qs.stringify({
-    where: {
-      user: { id: userId },
-    },
-    select: {
-      listing: true,
-    },
-  });
+export const getUserWishlists = async () => {
   const result = (
-    await axios.get(createUrl(`/api/wishlists?${query}`)).catch(() => null)
+    await get(createUrl(`/api/v1/wishlist/getMyLists`)).catch(() => null)
   )?.data;
+  
+  if (!result) {
+    console.log("cannot fetch my wish lists");
+  }
 
-  console.log({ result });
   return result;
+};
+
+// add wish list
+export const addToWishList = async (homeId) => {
+  const response = await axios.post(
+    createUrl("/api/v1/wishlist/create"),
+    { homeId },
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+
+  if (!response) {
+    return alert("Could not create task");
+  }
+
+  return response;
+};
+
+
+// remove wish lists
+export const removeFromWishList = async (homeId) => {
+  const result = await del(
+    createUrl(`/api/v1/wishlist/delete/${homeId}`));
+  if (!result) {
+    console.log("cannot delete");
+  }
+  return result;
+};
+
+export const addTrip = async (data) => {
+  const query = {
+    listing: {
+      id: data.listingId,
+    },
+    user: { id: data.userId },
+    tripData: data.tripData,
+  };
+  const result = await axios.post(createUrl("/api/trips"), { ...query });
+  if (!result) {
+    alert("failed");
+  } else {
+    return result;
+  }
 };

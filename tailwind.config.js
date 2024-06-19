@@ -15,7 +15,7 @@ module.exports = {
           "linear-gradient(to right,#063970 0%,#1e81b0 50%,#154c79 100%)",
       },
       colors: {
-        "betlembosa-theme-color": "#FF385C",
+        "betlembosa-theme-color": "#154C79",
         "betlembosa-light-black": "#222222",
         "betlembosa      `-light-gray": "#717171",
       },

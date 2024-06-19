@@ -3,11 +3,6 @@ export const createLisitingsSlice = (set, get) => ({
   setWishLists: (wishLists) => set({ wishLists }),
   wishListsPage: [],
   setWishListsPage: (wishListsPage) => set({ wishListsPage }),
-  addToWishListSlice: (id) => {
-    const lists = get().wishLists;
-    lists.push(id);
-    set({ wishLists: lists });
-  },
   removeFromWishList: () => {},
   currentListing: undefined,
   setCurrentListing: (listing) => set({ currentListing: listing }),
