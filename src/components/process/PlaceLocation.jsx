@@ -46,7 +46,7 @@ const PlaceLocation = () => {
         Your address is only shared with guests after they’ve made a
         reservation.
       </p>
-      <div className="h-[400px] w-[700px] ">
+      <div className="h-[400px] w-[700px]">
         <Map
           initialViewState={{
             longitude: -79.4512,

@@ -82,7 +82,7 @@ export default function ListingCard({
     <div className="flex items-center justify-center flex-col gap-1">
       <div
         className="flex items-center justify-center cursor-pointer w-full "
-        onClick={() => router.push(`/listing/${data.id}`)}
+        onClick={() => router.push(`/homes/${data.id}`)}
       >
         <div className="flex flex-col gap-2">
           <div className="relative w-64 h-56">

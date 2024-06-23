@@ -2,6 +2,8 @@ import { createUrl, post, del, get } from "./http";
 import QueryString from "qs";
 import axios from "axios";
 
+
+// create new host(home)
 export const createHomeAPI = async (hostData) => {
   const result = (
     await post(createUrl("/api/v1/home/create"), {
@@ -16,6 +18,7 @@ export const createHomeAPI = async (hostData) => {
   return result;
 };
 
+// get all hosts
 export const getAllHomes = async () => {
   const query =  QueryString.stringify({
     orderBy: { createdAt: "asc" },
@@ -31,6 +34,17 @@ export const getAllHomes = async () => {
   return result.data;
 };
 
+// get a single host(home)
+export const getHome = async (homeId) => {
+  const result = await axios.get(createUrl(`/api/v1/home/getHome?id=${homeId}`));
+  if (!result) {
+  }
+  return result.data;
+};
+
+
+// get my own hosts
+// user that creates thier hosts only.
 export const getMyHosts = async () => {
   const result = await get(createUrl('/api/v1/home/GetMyHomes'));
   if (!result) {
@@ -39,6 +53,7 @@ export const getMyHosts = async () => {
   return result.data;
 };
 
+// delete list(host)
 export const deleteListingAPI = async (id) => {
   const result = await del(createUrl(`/api/v1/home/delete?id=${id}`));
   if (!result) {

@@ -39,9 +39,9 @@ export default function MapView() {
     >
       <Map
         initialViewState={{
-          longitude: 72.5714,
-          latitude: 23.0225,
-          zoom: 11,
+          longitude: 38.763611,
+          latitude: 9.005401,
+          zoom: 6,
         }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={TOKEN}

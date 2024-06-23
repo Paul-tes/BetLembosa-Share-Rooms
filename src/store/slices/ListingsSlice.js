@@ -5,7 +5,10 @@ export const createLisitingsSlice = (set, get) => ({
   setWishListsPage: (wishListsPage) => set({ wishListsPage }),
   removeFromWishList: () => {},
   currentListing: undefined,
-  setCurrentListing: (listing) => set({ currentListing: listing }),
+  setCurrentListing: (hostData) => {
+    console.log("host Data in setCurrntListing on Slice", hostData);
+    set({ currentListing: hostData });
+  },
   removeUserListing: (listing) => {
     const listings = get().userListings;
     const index = listings.findIndex((list) => list.id === listing);
