@@ -20,8 +20,7 @@ axios.interceptors.request.use(
 
 export const createUrl = (endpoint) => new URL(endpoint, apiUrl).href;
 export const isStoredJwt = () => Boolean(localStorage.getItem(jwtKey));
-export const setStoredJwt = (accessToken) =>
-  localStorage.setItem(jwtKey, accessToken);
+export const setStoredJwt = (accessToken) => localStorage.setItem(jwtKey, accessToken);
 
 
 export const get = axios.get;

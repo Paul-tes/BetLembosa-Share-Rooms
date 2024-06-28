@@ -26,17 +26,18 @@ export default function TripScheduler() {
   const handleReservation = async () => {
     if (userInfo) {
       const data = {
-        listingId: currentListing.id,
-        userId: userInfo?.id,
-        tripData: {
-          startDate: state.startDate,
-          endDate: state.endDate,
-          price: `$${currentListing.price * calculateDaysDifference()}`,
-        },
+        hostName: currentListing.title,
+        hostPhoto: currentListing.photos[0],
+        startDate: state.startDate,
+        endDate: state.endDate,
+        hostId: currentListing.id,
+        successUrl: "https://localhost:3000/trips",
+        cancelUrl: "https://localhost:300/",
+        price: `${calculateDaysDifference()* currentListing.price}`,
       };
       const response = await addTrip(data);
       if (response) {
-        router.push("/trips");
+        console.log(response)
       }
     }
   };
@@ -98,13 +99,12 @@ export default function TripScheduler() {
         <span className="text-center w-full">You won t be charged yet</span>
         <div className="flex  justify-between w-full">
           <span>
-            ${currentListing.price} x {calculateDaysDifference()} nights
+            {calculateDaysDifference()} nights
           </span>
-          <span>${currentListing.price * calculateDaysDifference()}</span>
         </div>
         <div className="flex  justify-between w-full">
           <span>Total</span>
-          <span>${currentListing.price * calculateDaysDifference()}</span>
+          <span>${calculateDaysDifference() * currentListing.price}</span>
         </div>
       </div>
       <div className="flex border border-gray-400 rounded-lg p-4 gap-2 items-start px-8">

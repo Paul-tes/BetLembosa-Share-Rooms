@@ -22,7 +22,7 @@ import Description from "@/components/process/Description";
 import StepThreeStarter from "@/components/process/StepThreeStarter";
 import Price from "@/components/process/Price";
 import HomeHosted from "@/components/process/HomeHosted";
-
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   // handle steps state[numerical]
@@ -75,6 +75,8 @@ const Page = () => {
         return <></>;
     }
   };
+
+  const router = useRouter();
 
   return (
     <div className=" grid grid-rows-new-listing h-[100vh]">
