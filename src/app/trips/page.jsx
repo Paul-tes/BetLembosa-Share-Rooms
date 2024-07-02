@@ -2,10 +2,13 @@
 import CompactFooter from "@/components/footer/CompactFooter";
 import { getUserTrips } from "@/lib/host";
 import { useAppStore } from "@/store/store";
-
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import TripCard from "@/components/views/TripCard";
+import { Typography } from "@material-tailwind/react";
+import { completeTripPayment } from "@/lib/host";
+
 const Navbar = dynamic(() => import("@/components/navbar/Navbar"), {
   ssr: false,
 });
@@ -14,87 +17,59 @@ export default function Page() {
   const router = useRouter();
   const { userInfo } = useAppStore();
   const [tripData, setTripData] = useState([]);
+  const [homeData, setHomeData] = useState({});
+
   useEffect(() => {
     const getData = async () => {
       const data = await getUserTrips();
       setTripData(data);
-      console.log({ data });
     };
     if (userInfo) {
       getData();
     }
+  }, [userInfo]);
+
+  const completePayment = async () => {
+    const paymentProcessId = localStorage.getItem("PaymentProcessId");
+    console.log("Complate Payement is Called: PayementId:", paymentProcessId);
+    if (paymentProcessId) {
+      try {
+        const response = await completeTripPayment(paymentProcessId);
+        if (response && response.status === 200) {
+          console.log("Payment completed successfully:", response.data);
+          // Optionally remove the PaymentProcessId from localStorage if no longer needed
+          localStorage.removeItem("PaymentProcessId");
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      } catch (error) {
+        console.error("Error completing payment:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    completePayment();
   }, []);
 
-  function checkDateStatus(inputDate) {
-    const currentDate = new Date();
-    const providedDate = new Date(inputDate);
-
-    if (providedDate < currentDate) {
-      return "Completed";
-    } else if (providedDate > currentDate) {
-      return "Upcoming";
-    }
-  }
 
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="h-[82.5vh] flex justify-start items-start">
-        <div className="relative overflow-x-auto shadow-lg sm:rounded-lg w-full m-20">
-          <table className="w-full text-sm text-left text-gray-500 ">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-200 ">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Listing Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Check In Date
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Check out Date
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Payment
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Trip Status
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {tripData.map((trip, index) => (
-                <tr
-                  className="bg-white border-b  hover:bg-gray-100 "
-                  key={index}
-                >
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap cursor-pointer"
-                    onClick={() => router.push(`/listing/${trip.listing.id}`)}
-                  >
-                    {trip.listing.title}
-                  </th>
-                  <td className="px-6 py-4">{trip.tripData.startDate}</td>
-                  <td className="px-6 py-4">{trip.tripData.endDate}</td>
-                  <td className="px-6 py-4">{trip.tripData.price}</td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`${
-                        checkDateStatus(trip.tripData.startDate) === "Completed"
-                          ? "bg-green-500"
-                          : "bg-airbnb-theme-color"
-                      }  text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded`}
-                    >
-                      {checkDateStatus(trip.tripData.startDate)}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="flex justify-start items-start">
+        <div className="relative overflow-x-auto sm:rounded-lg w-full m-20 mt-32">
+          {Array.isArray(tripData) && tripData.length > 0 ? (
+            tripData.map((trip, index) => (
+              <TripCard key={index} data={trip} />
+            ))
+          ) : (
+            <Typography variant="h6" color="gray" className="m-20">
+              No trips available.
+            </Typography>
+          )}
         </div>
       </div>
       <CompactFooter />
-    </div>
+    </>
   );
 }

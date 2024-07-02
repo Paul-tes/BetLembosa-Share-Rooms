@@ -57,8 +57,7 @@ export default function Page({ params}) {
                 <div className="flex flex-col gap-3">
                   <h3 className="text-2xl font-semibold">
                     {currentListing?.locationType} hosted by{" "}
-                    {currentListing?.listingCreatedBy?.firstName}{" "}
-                    {currentListing?.listingCreatedBy?.lastName}
+                    {currentListing?.CreatedBy}{" "}
                   </h3>
                   <ul className="flex gap-5">
                     {Object.keys(JSON.parse(currentListing.placeSpace)).map((type) => (

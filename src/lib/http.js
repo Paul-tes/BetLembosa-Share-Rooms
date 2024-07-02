@@ -27,3 +27,4 @@ export const get = axios.get;
 export const patch = axios.patch;
 export const post = axios.post;
 export const del = axios.delete;
+export const put = axios.put;

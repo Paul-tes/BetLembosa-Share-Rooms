@@ -1,4 +1,4 @@
-import { createUrl, post, del, get } from "./http";
+import { createUrl, post, del, get, put } from "./http";
 import QueryString from "qs";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -121,11 +121,15 @@ export const addTrip = async (data) => {
       }
     }
   );
+  
+  
+  const res = await response.data;
+  console.log("Res data", res)
 
-  const session = await response.data;
+  localStorage.setItem("PaymentProcessId", res.tripId);
 
   const result = stripe.redirectToCheckout({
-    sessionId:session
+    sessionId:res.sessionId
   })
 
 
@@ -137,10 +141,33 @@ export const addTrip = async (data) => {
 };
 
 export const getUserTrips = async () => {
+
   const result = (
     await get(createUrl('/api/v1/trip/getAllTrips')).catch(() => null)
   )?.data;
-
-  console.log({ result });
+  
   return result;
+};
+
+
+export const completeTripPayment = async (paymentId) => {
+  console.log("Payement Process trigred: Id", paymentId);
+  try {
+    const result = await put(
+      createUrl(`/api/v1/trip/updatePayment`),
+      { 
+        paid: true,
+        id: paymentId,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return result;
+  } catch (error) {
+    console.error("Error completing payment:", error);
+    return null;
+  }
 };

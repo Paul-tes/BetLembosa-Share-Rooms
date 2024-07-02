@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^5.0.1",
+    "@material-tailwind/react": "^2.1.9",
     "@stripe/stripe-js": "^4.0.0",
     "@types/mapbox__mapbox-gl-geocoder": "^4.7.3",
     "axios": "^1.7.2",
