@@ -9,7 +9,7 @@ function ViewSwitchBadge() {
 
   return (
     <div className="fixed flex justify-center items-center bottom-8 left-0 right-0 cursor-pointer z-50 hover:p-2">
-      <div className="btn bg-blue-gray-900 hover:bg-slate-900 text-white px-4 py-3 rounded-full shadow-lg ">
+      <div className="btn bg-blue-gray-900 hover:bg-blue-gray-800 text-white px-4 py-3 rounded-full shadow-lg ">
         <span
           className="flex items-center gap-2 text-sm"
           onClick={() => setMapView()}
