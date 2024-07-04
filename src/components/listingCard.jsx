@@ -40,7 +40,10 @@ export default function ListingCard({
       const wishlistIds = wishlists.map((wishlist) => wishlist.id);
       setWishLists(wishlistIds);
     };
-    getData();
+
+    if(userInfo) {
+      getData();
+    }
   }, []);
 
 

@@ -171,3 +171,81 @@ export const completeTripPayment = async (paymentId) => {
     return null;
   }
 };
+
+export const removeTripApi = async (id) => {
+  console.log("Delete Trip api is called");
+  const result = await del(
+    createUrl(`/api/v1/trip/${id}`));
+  if (!result) {
+    console.log("cannot delete");
+  }
+  return result;
+};
+
+
+// get searched items
+export const getSearchListing = async (searchTerm) => {
+  const query = qs.stringify({
+    where: {
+      OR: [
+        {
+          locationData: {
+            path: ["place"],
+            string_contains: searchTerm,
+          },
+        },
+        {
+          locationData: {
+            path: ["region"],
+            string_contains: searchTerm,
+          },
+        },
+        {
+          locationData: {
+            path: ["country"],
+            string_contains: searchTerm,
+          },
+        },
+        {
+          locationData: {
+            path: ["district"],
+            string_contains: searchTerm,
+          },
+        },
+        {
+          locationData: {
+            path: ["landmark"],
+            string_contains: searchTerm,
+          },
+        },
+        {
+          locationData: {
+            path: ["locality"],
+            string_contains: searchTerm,
+          },
+        },
+        {
+          locationData: {
+            path: ["postcode"],
+            string_contains: searchTerm,
+          },
+        },
+        {
+          locationData: {
+            path: ["neighborhood"],
+            string_contains: searchTerm,
+          },
+        },
+      ],
+    },
+    orderBy: { createdAt: "asc" },
+  });
+  
+  const result = await get(createUrl(`/api/v1/home/getHomes?${query}`));
+  if (!result) {
+    console.log("not found");
+  }
+
+  console.log({ result });
+  return result.data;
+};

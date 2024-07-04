@@ -7,13 +7,19 @@ import {
   Button,
 } from "@material-tailwind/react";
 
+import { removeTripApi } from "@/lib/host";
+
+import { useAppStore } from "@/store/store";
+
 import { useRouter } from "next/navigation";
 
 export default function TripCard({data}) {
 
+  const { removeTrip } = useAppStore();
+  
   const router = useRouter();
 
-  function isUpcomming() {
+  const  isUpcomming = ()=> {
     const currentDate = new Date();
     const providedDate = new Date(data.endDate);
     if (providedDate < currentDate) {
@@ -23,10 +29,15 @@ export default function TripCard({data}) {
     }
   }
 
+  const deleteTrip = () => {
+    // update from the state
+    const result = removeTripApi(data.id);
+  }
+
 
 
   return (
-    <Card className="w-full max-w-[80vw] flex-row mb-4">
+    <Card className="w-full max-w-[80vw] flex-row mb-8">
       <CardHeader
         shadow={false}
         floated={false}
@@ -48,7 +59,7 @@ export default function TripCard({data}) {
             : <Button disabled variant="gradient">Passed</Button>
           }
 
-          <Button color="red">Delete Trip</Button>
+          <Button onClick={deleteTrip} color="red">Delete Trip</Button>
         </div>
 
         <Typography variant="h4" color="blue-gray" className="mb-4 mt-4">

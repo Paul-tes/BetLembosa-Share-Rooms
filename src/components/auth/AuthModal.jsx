@@ -1,19 +1,21 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import FormInput from "../common/FormInput";
 import { useAppStore } from "@/store/store";
 import { checkUser, login, signup } from "@/lib/auth";
+import AlertPop from "../common/Alert";
 
 const AuthModal = () => {
 
-  const { setAuthModal, setUserInfo, setIsLoggedIn, userInfo } = useAppStore();
+  const { setAuthModal, setUserInfo } = useAppStore();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userFound, setUserFound] = useState(null);
+  const [error, setError] = useState("");
 
   const verifyEmail = async () => {
     const data = await checkUser(email);
@@ -22,26 +24,46 @@ const AuthModal = () => {
   };
 
   const handleLogin = async () => {
-    if(email && password) {
-      const data = await login(email, password);
-      setUserInfo(data);
-      setAuthModal();
+    if (email && password) {
+      try {
+        const data = await login(email, password);
+        setUserInfo(data);
+        setAuthModal(false);
+      } catch (error) {
+        // set error and call the alert
+        // setErrorMessage(error.message);
+        setError(error.message);
+      }
     }
   };
 
+  // clearing ther error message and the alert.
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   const handleSignup = async () => {
-    if(email && password && firstName && lastName) {
-      const data = await signup(email, password, firstName, lastName);
-      setUserInfo(data);
-      setAuthModal();
+    if (email && password && firstName && lastName) {
+      try {
+        const data = await signup(email, password, firstName, lastName);
+        setUserInfo(data);
+        setAuthModal(false); // Make sure to close the modal on successful signup
+      } catch (error) {
+        // Set the error message to display the alert
+        setError(error.message);
+      }
     }
   };
-  
 
   return (
     <div className="relative z-50">
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-      <div className="fixed inset-0 z-10 overflow-y-auto">
+      <div className="fixed inset-0 z-10 overflow-y-auto animate-slide-down">
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <div className="bg-white  pb-4 pt-5">
@@ -122,6 +144,7 @@ const AuthModal = () => {
           </div>
         </div>
       </div>
+      {error && <AlertPop message={error}/>}
     </div>
   );
 };

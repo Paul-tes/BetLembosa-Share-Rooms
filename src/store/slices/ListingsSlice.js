@@ -1,4 +1,6 @@
 export const createLisitingsSlice = (set, get) => ({
+  trips: [],
+  setTrips: (trips) => set({ trips }),
   wishLists: [],
   setWishLists: (wishLists) => set({ wishLists }),
   wishListsPage: [],

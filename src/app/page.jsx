@@ -56,9 +56,7 @@ const Home = () => {
     }
     
     <Footer />
-    {
-      isAuthModalOpen && <AuthModal />
-    }
+    {isAuthModalOpen && <AuthModal />}
   </div>;
 };
 

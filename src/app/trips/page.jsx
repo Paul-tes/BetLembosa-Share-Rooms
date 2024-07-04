@@ -15,23 +15,21 @@ const Navbar = dynamic(() => import("@/components/navbar/Navbar"), {
 
 export default function Page() {
   const router = useRouter();
-  const { userInfo } = useAppStore();
+  const { userInfo, trips, setTrips } = useAppStore();
   const [tripData, setTripData] = useState([]);
-  const [homeData, setHomeData] = useState({});
 
   useEffect(() => {
     const getData = async () => {
       const data = await getUserTrips();
-      setTripData(data);
+      setTrips(data);
     };
     if (userInfo) {
       getData();
     }
-  }, [userInfo]);
+  }, [userInfo, trips]);
 
   const completePayment = async () => {
     const paymentProcessId = localStorage.getItem("PaymentProcessId");
-    console.log("Complate Payement is Called: PayementId:", paymentProcessId);
     if (paymentProcessId) {
       try {
         const response = await completeTripPayment(paymentProcessId);
@@ -58,8 +56,8 @@ export default function Page() {
       <Navbar />
       <div className="flex justify-start items-start">
         <div className="relative overflow-x-auto sm:rounded-lg w-full m-20 mt-32">
-          {Array.isArray(tripData) && tripData.length > 0 ? (
-            tripData.map((trip, index) => (
+          {trips.length > 0 ? (
+            trips.map((trip, index) => (
               <TripCard key={index} data={trip} />
             ))
           ) : (
