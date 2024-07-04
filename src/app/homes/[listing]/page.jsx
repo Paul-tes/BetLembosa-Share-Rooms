@@ -56,7 +56,7 @@ export default function Page({ params}) {
               <div className="flex flex-col gap-5">
                 <div className="flex flex-col gap-3">
                   <h3 className="text-2xl font-semibold">
-                    {currentListing?.locationType} hosted by{" "}
+                    {currentListing?.locationType} hosted by {currentListing?.createdBy}
                     {currentListing?.CreatedBy}{" "}
                   </h3>
                   <ul className="flex gap-5">

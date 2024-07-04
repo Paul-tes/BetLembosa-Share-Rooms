@@ -45,7 +45,7 @@ const Home = () => {
     }, [error]);
 
   return <div>
-    <Navbar/>
+    <Navbar isHome={true}/>
     <div className="flex items-center justify-center">
         <div className="w-[90vw] overflow-auto no-scrollbar mt-32 px-5">
           <ul className="flex gap-5 h-full">
