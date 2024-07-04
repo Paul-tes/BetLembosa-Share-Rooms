@@ -3,7 +3,7 @@
 const Navbar = dynamic(() => import("@/components/navbar/Navbar"), {ssr:false})
 import Footer from "@/components/footer/Footer";
 import AuthModal from "@/components/auth/AuthModal";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppStore } from "@/store/store";
 import { getAllHomes } from "@/lib/host";
 import { hostTypes } from "@/data/HostTypes";
@@ -11,20 +11,38 @@ import ListView from "@/components/views/ListView";
 import ViewSwitchBadge from "@/components/views/ViewSwitchBadge";
 import MapView from "@/components/views/MapView";
 import dynamic from "next/dynamic";
+import AlertPop from "@/components/common/Alert";
 
 const Home = () => {
 
   // States
+  const [error, setError] = useState("");
   const { isAuthModalOpen, setListings, isMapView } = useAppStore();
 
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getAllHomes();
-      setListings(data);
-    }
+      try {
+        const data = await getAllHomes();
+        setListings(data);
+      } catch (error) {
+        setError(error.message || "An unknown error occurred");
+      }
+    };
+
     getData();
   }, [setListings]);
+
+
+    // clearing ther error message and the alert.
+    useEffect(() => {
+      if (error) {
+        const timer = setTimeout(() => {
+          setError("");
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
+    }, [error]);
 
   return <div>
     <Navbar/>
@@ -57,6 +75,7 @@ const Home = () => {
     
     <Footer />
     {isAuthModalOpen && <AuthModal />}
+    {error && <AlertPop message={error}/>}
   </div>;
 };
 

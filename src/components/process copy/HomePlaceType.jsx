@@ -40,7 +40,7 @@ const HomePlaceType = () => {
           <li
             key={place.title}
             className={`flex border border-gray-300 p-7 justify-between rounded-lg hover:border-gray-500 cursor-pointer ${
-              placeType === place.title && "border-gray-950 bg-slate-100"
+              placeType === place.title && "border-gray-600 bg-blue-gray-50"
             }`}
             onClick={() => handleSelection(place.title)}
           >

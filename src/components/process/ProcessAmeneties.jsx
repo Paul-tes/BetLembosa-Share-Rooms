@@ -42,7 +42,7 @@ const ProcessAmeneties = () => {
                     key={name}
                     className={` flex flex-row justify-start font-semibold border border-gray-300 rounded-md p-3 hover:border-gray-950 transition-all duration-300 ${
                       placeAmenities?.find((amentiy) => amentiy === name) &&
-                      "border-gray-950 bg-slate-200"
+                      "border-gray-600 bg-blue-gray-50"
                     }`}
                     onClick={() => {
                       placeAmenities?.includes(name)

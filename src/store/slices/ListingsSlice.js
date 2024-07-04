@@ -21,6 +21,8 @@ export const createLisitingsSlice = (set, get) => ({
   },
   isMapView: false,
   listings: [],
+  allListings: [],
+  setAllListings: (allListings) =>set({allListings}),
   showScheduleBar: false,
   userListings: [],
   setUserListings: (userListings) => set({ userListings }),

@@ -26,7 +26,7 @@ const HomeTypeSelector = () => {
               key={type.name}
               className={`flex flex-row gap-2 font-semibold border border-gray-300 rounded-md p-3 hover:border-gray-950 transition-all duration-300 
                 ${
-                  type.name === homeType && "border-gray-950 bg-slate-100"
+                  type.name === homeType && "border-gray-600 bg-blue-gray-50"
                 }`}
               onClick={() => haddleSelection(type.name)}
             >

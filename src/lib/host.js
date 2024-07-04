@@ -1,6 +1,7 @@
 import { createUrl, post, del, get, put } from "./http";
 import QueryString from "qs";
 import { loadStripe } from "@stripe/stripe-js";
+import qs from "qs";
 
 
 // create new host(home)
@@ -18,20 +19,21 @@ export const createHomeAPI = async (hostData) => {
   return result;
 };
 
-// get all hosts
+// get all homes
 export const getAllHomes = async () => {
-  const query =  QueryString.stringify({
-    orderBy: { createdAt: "asc" },
-  });
+  try {
+    const query = QueryString.stringify({
+      orderBy: { createdAt: "asc" },
+    });
 
-  const result = await get(createUrl(`/api/v1/home/getHomes?${query}`));
-
-  if (!result) {
-    alert("Could not get Homes");
-    return [];
+    const response = await get(createUrl(`/api/v1/home/getHomes?${query}`));
+    if (!response) {
+      throw new Error("Could not get Homes");
+    }
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message || "An unknown error occurred");
   }
-
-  return result.data;
 };
 
 // get a single host(home)
@@ -184,68 +186,26 @@ export const removeTripApi = async (id) => {
 
 
 // get searched items
+// get searched items (filter on the frontend)
 export const getSearchListing = async (searchTerm) => {
-  const query = qs.stringify({
-    where: {
-      OR: [
-        {
-          locationData: {
-            path: ["place"],
-            string_contains: searchTerm,
-          },
-        },
-        {
-          locationData: {
-            path: ["region"],
-            string_contains: searchTerm,
-          },
-        },
-        {
-          locationData: {
-            path: ["country"],
-            string_contains: searchTerm,
-          },
-        },
-        {
-          locationData: {
-            path: ["district"],
-            string_contains: searchTerm,
-          },
-        },
-        {
-          locationData: {
-            path: ["landmark"],
-            string_contains: searchTerm,
-          },
-        },
-        {
-          locationData: {
-            path: ["locality"],
-            string_contains: searchTerm,
-          },
-        },
-        {
-          locationData: {
-            path: ["postcode"],
-            string_contains: searchTerm,
-          },
-        },
-        {
-          locationData: {
-            path: ["neighborhood"],
-            string_contains: searchTerm,
-          },
-        },
-      ],
-    },
-    orderBy: { createdAt: "asc" },
-  });
-  
-  const result = await get(createUrl(`/api/v1/home/getHomes?${query}`));
-  if (!result) {
-    console.log("not found");
-  }
+  console.log("getSearchListing called");
 
-  console.log({ result });
-  return result.data;
+  try {
+    const allHomes = await getAllHomes();
+    const filteredHomes = allHomes.filter(home => {
+      const locationData = JSON.parse(home.locationData);
+      return Object.values(locationData).some(value =>
+        value.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    });
+
+    if (filteredHomes.length === 0) {
+      throw new Error("No results found");
+    }
+
+    return filteredHomes;
+  } catch (error) {
+    throw new Error(error.message || "An unknown error occurred");
+  }
 };
+
