@@ -12,6 +12,7 @@ import ViewSwitchBadge from "@/components/views/ViewSwitchBadge";
 import MapView from "@/components/views/MapView";
 import dynamic from "next/dynamic";
 import AlertPop from "@/components/common/Alert";
+import { getHomeTypeSearch } from "@/lib/host";
 
 const Home = () => {
 
@@ -34,15 +35,25 @@ const Home = () => {
   }, [setListings]);
 
 
-    // clearing ther error message and the alert.
-    useEffect(() => {
-      if (error) {
-        const timer = setTimeout(() => {
-          setError("");
-        }, 5000);
-        return () => clearTimeout(timer);
-      }
-    }, [error]);
+  // clearing ther error message and the alert.
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
+  // haddle home type Search
+  const haddleSearch = (typeName) => async () => {
+    try {
+      const data = await getHomeTypeSearch(typeName);
+      setListings(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return <div>
     <Navbar isHome={true}/>
@@ -51,8 +62,9 @@ const Home = () => {
           <ul className="flex gap-5 h-full">
             {hostTypes.map((data) => (
               <li
+                onClick={haddleSearch(data.name)} 
                 key={data.name}
-                className="w-max flex flex-col items-center justify-between h-16 cursor-pointer"
+                className="w-max flex flex-col items-center justify-between h-16 cursor-pointer hover:p-2 hover:shadow-lg hover:shadow-blue-gray-600"
               >
                 <span className="h-10 w-10  flex items-center justify-center">
                   {data.svgPath}

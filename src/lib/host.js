@@ -188,7 +188,6 @@ export const removeTripApi = async (id) => {
 // get searched items
 // get searched items (filter on the frontend)
 export const getSearchListing = async (searchTerm) => {
-  console.log("getSearchListing called");
 
   try {
     const allHomes = await getAllHomes();
@@ -209,3 +208,21 @@ export const getSearchListing = async (searchTerm) => {
   }
 };
 
+export const getHomeTypeSearch = async (type) => {
+  try {
+    const allHomes = await getAllHomes();
+    
+    const filteredHomes = allHomes.filter(home => {
+      // Assuming homeType is a string attribute in each home object
+      return home.homeType.toLowerCase() === type.toLowerCase();
+    });
+
+    if (filteredHomes.length === 0) {
+      throw new Error(`No results found for home type "${type}"`);
+    }
+
+    return filteredHomes;
+  } catch (error) {
+    throw new Error(error.message || "An unknown error occurred");
+  }
+};
