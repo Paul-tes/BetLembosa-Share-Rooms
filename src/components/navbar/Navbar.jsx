@@ -9,12 +9,15 @@ import { useAppStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { getSearchListing } from "@/lib/host";
 import AlertPop from "../common/Alert";
+import useNavigationGuard from "@/hooks/useNavigationGuard";
 
 const Navbar = ({isHome}) => {
 
   const [error, setError] = useState("");
 
   const router = useRouter();
+
+  const navigate = useNavigationGuard();
 
   // use state from zstand from appStore, AuthSlice
   // get setAuthModal mePthod in zstand metod.
@@ -138,6 +141,9 @@ const Navbar = ({isHome}) => {
       }
     }, [error]);
 
+    // navigation Guard
+
+
   return (
     <div className="fixed z-50 bg-white shadow-md w-full flex flex-col justify-center transition-all duration-30 h-20 border-b border-b-gray-200">
       <div className="flex items-center justify-between px-20">
@@ -172,7 +178,7 @@ const Navbar = ({isHome}) => {
           <ul className="flex items-center justify-end gap-6 font-medium">
             <li
               className="cursor-pointer"
-              onClick={() => router.push("/host")}
+              onClick={() => navigate("/host")}
             >
               <span>ቤት ለምቦሳ | Host Now</span>
             </li>

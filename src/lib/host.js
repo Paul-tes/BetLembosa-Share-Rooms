@@ -1,7 +1,6 @@
 import { createUrl, post, del, get, put } from "./http";
 import QueryString from "qs";
 import { loadStripe } from "@stripe/stripe-js";
-import qs from "qs";
 
 
 // create new host(home)

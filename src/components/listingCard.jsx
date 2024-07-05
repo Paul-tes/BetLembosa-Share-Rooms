@@ -14,6 +14,7 @@ import {
 import React, { useEffect } from "react";
 import { getUserWishlists } from "@/lib/host";
 import { usePathname, useRouter } from "next/navigation";
+import useNavigationGuard from "@/hooks/useNavigationGuard";
 import {
   deleteListingAPI,
   addToWishList,
@@ -39,6 +40,8 @@ export default function ListingCard({
   const pathname = usePathname();
 
   const router = useRouter();
+
+  const navigate = useNavigationGuard();
 
   // fetch the wishlist if the user logged in.
   useEffect(() => {
@@ -88,11 +91,11 @@ export default function ListingCard({
     // Update state with new arrays
     setWishListsPage(updatedWishListsPage);
     setWishLists(updatedWishlist);
-    console.log(wishLists);
   };
 
   return (
     <Card className="w-full max-w-[26rem] shadow-lg mt-5">
+      {console.log(data)}
       <CardHeader floated={false} color="blue-gray">
         <img
           src={data?.photos[0]}
@@ -183,7 +186,7 @@ export default function ListingCard({
               </svg>
             </span>
           </Tooltip>
-          <Tooltip content="2 bedrooms">
+          <Tooltip content={`${JSON.parse(data.placeSpace).beds} bedrooms`}>
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -229,9 +232,9 @@ export default function ListingCard({
               </svg>
             </span>
           </Tooltip>
-          <Tooltip content="And +20 more">
+          <Tooltip content={`And +${data.placeAmenities.length} more`}>
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
-              +20
+              +{data.placeAmenities.length}
             </span>
           </Tooltip>
         </div>
@@ -252,7 +255,7 @@ export default function ListingCard({
 
         <Button variant="text"
           className="flex items-center gap-2 mt-4"
-          onClick={() => router.push(`/homes/${data.id}`)}
+          onClick={() => navigate(`/homes/${data.id}`)}
         >
           Host Detail
           <svg
