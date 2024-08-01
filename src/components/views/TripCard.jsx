@@ -82,7 +82,7 @@ export default function TripCard({data}) {
 
         <Button variant="text"
           className="flex items-center gap-2 mt-4"
-          onClick={() => router.push(`/homes/${data.id}`)}
+          onClick={() => router.push(`/homes/${data.homeId}`)}
         >
           Host Detail
           <svg
