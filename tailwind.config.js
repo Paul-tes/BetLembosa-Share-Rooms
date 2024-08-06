@@ -1,15 +1,45 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const withMT = require("@material-tailwind/react/utils/withMT");
+import daisyui from 'daisyui'
+module.exports = withMT({
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    // material
+    "./node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "betlembosa-gradient":
+          "linear-gradient(to right,#063970 0%,#1e81b0 50%,#154c79 100%)",
+      },
+      colors: {
+        "betlembosa-theme-color": "#154C79",
+        "betlembosa-light-black": "#222222",
+        "betlembosa      `-light-gray": "#717171",
+      },
+      gridTemplateRows: {
+        "new-listing": "10vh 80vh 10vh",
+      },
+      animation: {
+        'slide-down': 'slide-down 0.5s ease-out',
+      },
+      keyframes: {
+        'slide-down': {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      }
+    },
   },
   plugins: [],
-}
+  plugins: [daisyui],
+  daisyui: {
+    themes: [],
+  },
+});

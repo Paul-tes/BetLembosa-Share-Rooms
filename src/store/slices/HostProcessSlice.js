@@ -1,0 +1,22 @@
+export const createNewHostProcessSlice = (set, get) => ({
+  homeType: undefined, // locatinType
+  setHomeType: (homeType) => set({ homeType }),
+  placeType: undefined,
+  setPlaceType: (placeType) => set({ placeType }),
+  mapData: undefined,
+  setMapData: (mapData) => set({ mapData }),
+  locationData: undefined,
+  setLocationData: (locationData) => set({ locationData }),
+  placeSpace: { bathrooms: 1, beds: 1, guests: 2 },
+  setPlaceSpace: (placeSpace) => set({ placeSpace }),
+  placeAmenities: [],
+  setPlaceAmenities: (placeAmenities) => set({ placeAmenities }),
+  photos: [],
+  setPhotos: (photos) => set({ photos }),
+  title: "",
+  setTitle: (title) => set({ title }),
+  description: "",
+  setDescription: (description) => set({ description }),
+  price: 0,
+  setPrice: (price) => set({ price }),
+});

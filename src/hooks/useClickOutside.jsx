@@ -1,8 +1,8 @@
-import { userAppStore } from "airbnb/store/store";
+import { useAppStore } from "@/store/store";
 import { useEffect, RefObject, useRef } from "react";
 
 function useClickOutside(isScheduleBar = false) {
-  const { setSelectionType, setShowScheduleBar } = userAppStore();
+  const { setSelectionType, setShowScheduleBar } = useAppStore();
   const containerRef = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
