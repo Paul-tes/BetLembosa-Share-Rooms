@@ -2,6 +2,18 @@
 
 <div align="center">
   <img src="./Logo.png" alt="logo" />
+
+  ![Alt Text](./ScreenShoot/Login.png)
+  ![Home Page](./ScreenShoot/HomePage.png)
+  ![Hope Page Map View](./ScreenShoot/HopePageMapView.png)
+  ![Host New Home](./ScreenShoot/Host_One.png)
+  ![Host New Home](./ScreenShoot/Host_01.png)
+  ![Host New Home](./ScreenShoot/Host_amenities.png)
+  ![Host New Home](./ScreenShoot/Host-map.png)
+  ![Host New Home](./ScreenShoot/Host_photo.png)
+  ![Host Detail page](./ScreenShoot/HostDetailPage.png)
+  ![Alt Text](./ScreenShoot/CheckOut.png)
+
   <br/>
   <h3><b>BetLembosa</h3>
 </div>
